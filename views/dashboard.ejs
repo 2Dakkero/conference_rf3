@@ -1,0 +1,9 @@
+<h1><%= title %></h1>
+<p>Пользователь: <%= user.fio %></p>
+
+<h2>Заявки:</h2>
+<ul>
+    <% requests.forEach(item => { %>
+        <li><%= item.room_name %> — <%= item.status %></li>
+    <% }) %>
+</ul>

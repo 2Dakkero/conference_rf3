@@ -4,6 +4,36 @@ const PORT = 3000;
 
 app.use(express.urlencoded({ extended: true }));
 
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
+app.get('/register', (req, res) => {
+    res.render('register', {title: 'Регистрация на портале', user: null});
+});
+
+app.post('/register', (req, res) => {
+    res.render('register', {title: 'Регистрация на портале', user: req.body});
+});
+
+app.get('/login', (req, res) => {
+    res.render('login', {title: 'Авторизация'});
+});
+
+app.post('/login', (req, res) => {
+    res.redirect('/dashboard');
+});
+
+app.get('/dashboard', (req, res) => {
+    res.render('dashboard', {
+        title: 'Мои заявки',
+        user: { fio: 'Иванов Иван' },
+        requests: [
+            { room_name: 'Аудитория 403', status: 'Новая' },
+            { room_name: 'Альянсг', status: 'Завершено' }
+        ]
+    });
+});
+
 app.get(`/`, (req, res) => {
     res.send(`<h1> Конференция Рф</h1> <a href="/register"> Регистрация</a>`);
 });
